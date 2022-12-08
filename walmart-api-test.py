@@ -1,8 +1,8 @@
 import requests
 
-url = "https://walmart.p.rapidapi.com/v2/auto-complete"
+url = "https://walmart.p.rapidapi.com/products/v2/list"
 
-querystring = {"term":"macbook air"}
+querystring = {"cat_id":"0","sort":"best_seller","page":"1","query":"lamp"}
 
 headers = {
     "X-RapidAPI-Key": "59bf78a120msh202ae2ddf319bffp1ade43jsn475905aa75be",
