@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% block head %}
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      {% block styles %}
+        <!-- Bootstrap CSS -->
+        {{ bootstrap.load_css() }}
+      {% endblock %}
+
+      <title>Project 2 </title>
+      <link rel = "stylesheet" type = "text/css" href = "{{url_for('static', filename='style.css')}}">
+    {% endblock %}
+  </head>
+  <body>
+    <!-- Your page content -->
+    {% block content %}
+    <div class="container mt-5">
+      <div class="row d-flex justify-content-center">
+          <div class="col-md-10">
+              <div class="card p-3  py-4">
+                  <h5>Search results for {{ query }}</h5>
+                  <div class="row g-3 mt-2">
+                      <div class="col-md-3">
+                        <ol>
+                          {% for product in product_list %}
+                            <li>{{ product }}</li>
+                          {%endfor %}
+                        </ol>
+                    </div>
+                </div>              
+            </div>
+        </div>
+    </div>
+
+</div>
+		{% endblock %}
+
+    {% block scripts %}
+      <!-- Optional JavaScript -->
+      {{ bootstrap.load_js() }}
+    {% endblock %}
+    
+  </body>
+  <footer class="bg-light text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2022 CST group 3700: Christopher Raya, Kyle Dowling, Ricardo Perez Jr
+    </div>
+    <!-- Copyright -->
+  </footer>
+</html>
