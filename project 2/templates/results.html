@@ -18,32 +18,23 @@
   <body>
     <!-- Your page content -->
     {% block content %}
-    <div class="container mt-10">
+    <div class="container mt-5">
       <div class="row d-flex justify-content-center">
-          <div class="col-md-10 m-5">
-              <div class="card p-10  py-10">
+          <div class="col-md-10">
+              <div class="card p-3  py-4">
                   <h5>Search results for {{ query }}</h5>
-                  <div class="row g-3 mt-5">
-                      <div class="col-md-10">
+                  <div class="row g-3 mt-2">
+                      <div class="col-md-3">
+                        <ol>
                           {% for product in product_list %}
-                            <br>
-                            {{product.store}}
-                            <h1>
-                              {{product.name}}
-                            </h1>
-                            <img src={{ product.image_url}} alt="Product Image">
-                              {{product.price}}
-                              <br>
-                              <a href={{product.purchase_url}}>Purchase Link</a>
-                              <hr>
-                          {%endfor%}
+                            <li>{{ product }}</li>
+                          {%endfor %}
+                        </ol>
                     </div>
                 </div>              
             </div>
-            <input type="submit" value="Back To Search" onclick="history.back()">
         </div>
     </div>
-   
 
 </div>
 		{% endblock %}

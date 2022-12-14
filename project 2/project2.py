@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask import request
-import random
 import requests
 import json
 
@@ -25,9 +24,9 @@ def search_walmart_and_target(keyword):
    url = "https://target-com-store-product-reviews-locations-data.p.rapidapi.com/product/search"
    querystring = {"store_id":"2306","keyword":keyword,"offset":"0","limit":"24","sponsored":"1","rating":"0"}
    headers = {
-	"X-RapidAPI-Key": "6522102ca0msh755bfb68d625a1bp16e2f2jsnd67d6bb895dd",
-	"X-RapidAPI-Host": "target-com-store-product-reviews-locations-data.p.rapidapi.com"
-   }
+      "X-RapidAPI-Key": "59bf78a120msh202ae2ddf319bffp1ade43jsn475905aa75be",
+      "X-RapidAPI-Host": "target-com-store-product-reviews-locations-data.p.rapidapi.com"
+      }
    response = requests.request("GET", url, headers=headers, params=querystring)
    print(response.text)
    j = json.loads(response.text)
@@ -56,7 +55,7 @@ def search_walmart_and_target(keyword):
         p = j["data"]["search"]["searchResult"]["itemStacks"][0]["items"][x]
         name = p["name"]
         store = "Walmart"
-        purchase_url = "https://www.walmart.com" + p["canonicalUrl"]
+        purchase_url = "www.walmart.com" + p["canonicalUrl"]
         image_url = p["imageInfo"]["thumbnailUrl"]
         price = p["priceInfo"]["priceRange"]["priceString"]
         productList.append(Product(name, store, purchase_url, image_url, price))
@@ -80,5 +79,4 @@ def hello():
 def results():
    query=request.args.get("query")
    product_list = search_walmart_and_target(query)
-   random.shuffle(product_list)
    return render_template('results.html', query=query, product_list=product_list)
