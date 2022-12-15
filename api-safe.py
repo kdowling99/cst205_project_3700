@@ -1,3 +1,11 @@
+'''
+Course: CST205-01_FA22
+Title: Target Walmart Project
+Abstract:
+Authors: Christopher Raya, Kyle Dowling, Ricardo Perez JR
+Date: 12/05/2022
+'''
+
 import requests
 import json
 
