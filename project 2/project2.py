@@ -1,3 +1,10 @@
+'''
+Course: CST205-01_FA22
+Title: Target Walmart Project
+Abstract:
+Authors: Christopher Raya, Kyle Dowling, Ricardo Perez JR
+Date: 12/05/2022
+'''
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask import request
@@ -6,6 +13,10 @@ import requests
 import json
 
 #API STUFF ~~~~~~~~~~~~~~~~~~~~~~~~~~
+#Kyle Dowling worked on all the api stuff
+
+# Class Product stores all the information that we pass to the front end 
+# to conveniently reference it in the html using jinga2 magic
 class Product:
    ''' a class to model a product '''
    def __init__(self, name, store, purchase_url, image_url, price):
@@ -15,13 +26,16 @@ class Product:
       self.image_url = image_url
       self.price = price
    def __str__(self):
-      #return f'{self.name} from {self.store}'
       return f'Name: {self.name}\nStore: {self.store}\nPrice: {self.price}'
    def __eq__(self, other):
       return self.purchase_url == other.purchase_url
+
+# this function takes a keyword and then searches both the walmart and target APIS respectfully,
+# gathers information about the product results, puts them in the Product class, and finally returns a list of Products
 def search_walmart_and_target(keyword):
    productList = []
 
+   # Target API call
    url = "https://target-com-store-product-reviews-locations-data.p.rapidapi.com/product/search"
    querystring = {"store_id":"2306","keyword":keyword,"offset":"0","limit":"24","sponsored":"1","rating":"0"}
    headers = {
@@ -42,6 +56,8 @@ def search_walmart_and_target(keyword):
          productList.append(Product(name, store, purchase_url, image_url, price))
       except:
          print("error: failed to load product")
+   
+   # Walmart API call
    url = "https://walmart.p.rapidapi.com/products/v2/list"
    querystring = {"cat_id":"0","sort":"best_seller","page":"1","query":keyword}
    headers = {
@@ -70,7 +86,9 @@ def search_walmart_and_target(keyword):
 
 app = Flask(__name__)
 bootstrap = Bootstrap5(app)
-
+# this is how we get flask and the website to work.
+#app.route('/') is the start page
+#Christopher Raya worked on the front end and flask.
 @app.route('/')
 def hello():
 
@@ -78,6 +96,7 @@ def hello():
 
 @app.route('/results', methods=['GET'])
 def results():
+   #This function grabs the products from the api and posts them on the results tab.
    query=request.args.get("query")
    product_list = search_walmart_and_target(query)
    random.shuffle(product_list)

@@ -11,7 +11,7 @@
         {{ bootstrap.load_css() }}
       {% endblock %}
 
-      <title>Project 2 </title>
+      <title>Project 3700</title>
       <link rel = "stylesheet" type = "text/css" href = "{{url_for('static', filename='style.css')}}">
     {% endblock %}
   </head>
@@ -25,6 +25,8 @@
                   <h5>Search results for {{ query }}</h5>
                   <div class="row g-3 mt-5">
                       <div class="col-md-10">
+                        <!-- This is how the products are pushed into the website. -->
+                        <!-- Ricardo worked on this function. -->
                           {% for product in product_list %}
                             <br>
                             {{product.store}}
